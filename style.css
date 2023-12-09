@@ -14,15 +14,16 @@ body {
 
 .calculator {
     width: 400px;
-    height: 600px;
+    height: 650px;
     padding: 10px;
     background-color: grey;
     border-radius: 10px;
+    text-align: left;
 }
 
 .display {
     margin: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     width: 350px;
     height: 100px;
     background-color: aqua;
@@ -33,7 +34,8 @@ body {
     display: flex;
     flex-wrap: wrap;
 }
-button {
+
+.calc-btns > button {
     height: 100px;
     width: 75px;
     margin: 2px;
@@ -49,5 +51,16 @@ button {
 .equals {
     background-color: darkgrey;
     border: black 2px solid;
+}
+
+.clear {
+    padding: 10px;
+    margin: 0px 15px;
+    background-color: red;
+    border: black 2px solid;
+    width: 120px;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 5px;
 }
 
