@@ -21,7 +21,7 @@ function operate(num1, num2, operator) {
     switch (operator) {
         case "+":
             return add(num1, num2);
-        case "-":
+        case "−":
             return subtract(num1, num2);
         case "x":
             return multiply(num1, num2);
@@ -36,18 +36,31 @@ function operate(num1, num2, operator) {
 function changeDisplay() {
 
     let answer = document.querySelector(".answer");
-    let display = document.querySelector(".display");
     let digits = document.querySelectorAll(".digit");
     let displayAnswer = answer.textContent;
 
     digits.forEach(digit => {
         digit.addEventListener("click", () => {
-            if (displayAnswer === "0" && digit.textContent !== ".") {
-                displayAnswer = digit.textContent;
-            } else {
-                displayAnswer = displayAnswer + digit.textContent;
+            console.log(displayAnswer, "hi");
+            if(num1 == null && num2 == null) {
+                if (displayAnswer === "0" && digit.textContent !== ".") {
+                    displayAnswer = digit.textContent;
+                } else {
+                    displayAnswer = displayAnswer + digit.textContent;
+                }
+
+                answer.textContent = displayAnswer;
             }
-            answer.textContent = displayAnswer;
+
+            if (num1 != null) {
+                if (displayAnswer === "0" && digit.textContent !== ".") {
+                    displayAnswer = digit.textContent;
+                } else {
+                    displayAnswer = displayAnswer + digit.textContent;
+                }
+
+                answer.textContent = displayAnswer;
+            }
         });
     });
 
@@ -55,6 +68,8 @@ function changeDisplay() {
 
     clear.addEventListener("click", () => {
         displayAnswer = "0";
+        num1 = null;
+        num2 = null;
         answer.textContent = displayAnswer;
     });
 
@@ -74,7 +89,11 @@ function changeDisplay() {
     equals.addEventListener("click", () => {
         num2 = answer.textContent;
         displayAnswer = operate(Number(num1), Number(num2), op);
+        console.log(displayAnswer);
         answer.textContent = displayAnswer;
+        num1 = displayAnswer;
+        num2 = null;
+        console.log(num1, num2);
     });
 
 }
