@@ -86,14 +86,17 @@ function changeDisplay() {
     equals.addEventListener("click", () => {
         num2 = answer.textContent;
 
-        if (num2 === "0" && op === "÷") {
-            answer.textContent = "ERROR";
-        } else {
-            displayAnswer = operate(Number(num1), Number(num2), op);
-            answer.textContent = displayAnswer;
+        if (op != null) {
+            if (num2 === "0" && op === "÷") {
+                answer.textContent = "ERROR";
+            } else {
+                displayAnswer = operate(Number(num1), Number(num2), op);
+                answer.textContent = displayAnswer;
+            }
+            displayAnswer = "0";
+
+            op = null;
         }
-        displayAnswer = "0";
-        
     });
 
 }
