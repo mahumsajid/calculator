@@ -75,6 +75,7 @@ function changeDisplay() {
         num2 = answer.textContent;
         displayAnswer = operate(Number(num1), Number(num2), op);
         answer.textContent = displayAnswer;
+        displayAnswer = "0";
     });
 
 }
