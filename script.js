@@ -41,26 +41,14 @@ function changeDisplay() {
 
     digits.forEach(digit => {
         digit.addEventListener("click", () => {
-            console.log(displayAnswer, "hi");
-            if(num1 == null && num2 == null) {
-                if (displayAnswer === "0" && digit.textContent !== ".") {
-                    displayAnswer = digit.textContent;
-                } else {
-                    displayAnswer = displayAnswer + digit.textContent;
-                }
-
-                answer.textContent = displayAnswer;
+            if (displayAnswer === "0" && digit.textContent !== ".") {
+                displayAnswer = digit.textContent;
+            } else {
+                displayAnswer = displayAnswer + digit.textContent;
             }
 
-            if (num1 != null) {
-                if (displayAnswer === "0" && digit.textContent !== ".") {
-                    displayAnswer = digit.textContent;
-                } else {
-                    displayAnswer = displayAnswer + digit.textContent;
-                }
+            answer.textContent = displayAnswer;
 
-                answer.textContent = displayAnswer;
-            }
         });
     });
 
@@ -68,13 +56,10 @@ function changeDisplay() {
 
     clear.addEventListener("click", () => {
         displayAnswer = "0";
-        num1 = null;
-        num2 = null;
         answer.textContent = displayAnswer;
     });
 
     let operators = document.querySelectorAll(".operator");
-    //let num1, num2, op;
 
     operators.forEach(operator => {
         operator.addEventListener("click", () => {
@@ -89,11 +74,7 @@ function changeDisplay() {
     equals.addEventListener("click", () => {
         num2 = answer.textContent;
         displayAnswer = operate(Number(num1), Number(num2), op);
-        console.log(displayAnswer);
         answer.textContent = displayAnswer;
-        num1 = displayAnswer;
-        num2 = null;
-        console.log(num1, num2);
     });
 
 }
