@@ -20,44 +20,63 @@ function operate(num1, num2, operator) {
     
     switch (operator) {
         case "+":
-            add(num1, num2);
-            break;
+            return add(num1, num2);
         case "-":
-            subtract(num1, num2);
-            break;
+            return subtract(num1, num2);
         case "x":
-            multiply(num1, num2);
-            break;
+            return multiply(num1, num2);
         case "/":
-            divide(num1, num2);
-            break;
+            return divide(num1, num2);
+        default:
+            return 0;
     }
 
 }
 
-function getAnswer() {
+function changeDisplay() {
 
     let answer = document.querySelector(".answer");
     let display = document.querySelector(".display");
     let digits = document.querySelectorAll(".digit");
-    //let displayAnswer = answer.textContent;
+    let displayAnswer = answer.textContent;
 
     digits.forEach(digit => {
-        digit.addEventListener("click", event => {
-            if (answer.textContent === "0" && digit.textContent !== ".") {
-                answer.textContent = digit.textContent;
+        digit.addEventListener("click", () => {
+            if (displayAnswer === "0" && digit.textContent !== ".") {
+                displayAnswer = digit.textContent;
             } else {
-                answer.textContent = answer.textContent + digit.textContent;
+                displayAnswer = displayAnswer + digit.textContent;
             }
+            answer.textContent = displayAnswer;
         });
     });
 
     let clear = document.querySelector(".clear");
 
     clear.addEventListener("click", () => {
-        answer.textContent = "0";
+        displayAnswer = "0";
+        answer.textContent = displayAnswer;
+    });
+
+    let operators = document.querySelectorAll(".operator");
+    //let num1, num2, op;
+
+    operators.forEach(operator => {
+        operator.addEventListener("click", () => {
+            num1 = answer.textContent;
+            op = operator.textContent;
+            displayAnswer = "0";
+        });
+    });
+
+    let equals = document.querySelector(".equals");
+
+    equals.addEventListener("click", () => {
+        num2 = answer.textContent;
+        displayAnswer = operate(Number(num1), Number(num2), op);
+        answer.textContent = displayAnswer;
     });
 
 }
 
-getAnswer();
+changeDisplay();
