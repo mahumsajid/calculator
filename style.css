@@ -27,6 +27,15 @@ body {
     width: 350px;
     height: 100px;
     background-color: aqua;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.answer {
+    font-size: 60px;
+    margin: 15px;
+    font-weight: 400;
 }
 
 .calc-btns {
