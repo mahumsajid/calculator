@@ -14,7 +14,7 @@ function divide(num1, num2) {
     return num1 / num2;
 }
 
-let num1, num2, operator;
+let num1, num2, op;
 
 function operate(num1, num2, operator) {
     
@@ -66,9 +66,18 @@ function changeDisplay() {
 
     operators.forEach(operator => {
         operator.addEventListener("click", () => {
-            num1 = answer.textContent;
-            op = operator.textContent;
-            displayAnswer = "0";
+            if (op != null) {
+                num2 = answer.textContent;
+                num1 = operate(Number(num1), Number(num2), op);
+                answer.textContent = num1;
+                op = operator.textContent;
+                console.log(num1);
+                displayAnswer = "0";
+            } else {
+                num1 = answer.textContent;
+                op = operator.textContent;
+                displayAnswer = "0";
+            }
         });
     });
 
