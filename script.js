@@ -52,6 +52,12 @@ function getAnswer() {
         });
     });
 
+    let clear = document.querySelector(".clear");
+
+    clear.addEventListener("click", () => {
+        answer.textContent = "0";
+    });
+
 }
 
 getAnswer();
