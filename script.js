@@ -57,6 +57,9 @@ function changeDisplay() {
     clear.addEventListener("click", () => {
         displayAnswer = "0";
         answer.textContent = displayAnswer;
+        num1 = null;
+        num2 = null;
+        op = null;
     });
 
     let operators = document.querySelectorAll(".operator");
@@ -73,9 +76,15 @@ function changeDisplay() {
 
     equals.addEventListener("click", () => {
         num2 = answer.textContent;
-        displayAnswer = operate(Number(num1), Number(num2), op);
-        answer.textContent = displayAnswer;
+
+        if (num2 === "0" && op === "÷") {
+            answer.textContent = "ERROR";
+        } else {
+            displayAnswer = operate(Number(num1), Number(num2), op);
+            answer.textContent = displayAnswer;
+        }
         displayAnswer = "0";
+        
     });
 
 }
