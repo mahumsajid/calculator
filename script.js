@@ -90,7 +90,7 @@ function changeDisplay() {
             } else {
                 num1 = answer.textContent;
             }
-            
+
             op = operator.textContent;
             pairs = false;
             displayAnswer = "0";
@@ -102,7 +102,7 @@ function changeDisplay() {
     equals.addEventListener("click", () => {
         num2 = answer.textContent;
 
-        if (op != null) {
+        if (op != null && pairs) {
             if (num2 === "0" && op === "÷") {
                 answer.textContent = "ERROR";
             } else {
