@@ -51,6 +51,7 @@ function changeDisplay() {
     let answer = document.querySelector(".answer");
     let digits = document.querySelectorAll(".digit");
     let displayAnswer = answer.textContent;
+    let pairs = false;
 
     digits.forEach(digit => {
         digit.addEventListener("click", () => {
@@ -61,6 +62,7 @@ function changeDisplay() {
             }
 
             answer.textContent = displayAnswer;
+            pairs = true;
 
         });
     });
@@ -73,24 +75,25 @@ function changeDisplay() {
         num1 = null;
         num2 = null;
         op = null;
+        pairs = false;
     });
 
     let operators = document.querySelectorAll(".operator");
 
     operators.forEach(operator => {
         operator.addEventListener("click", () => {
-            if (op != null) {
+
+            if (op != null && pairs) {
                 num2 = answer.textContent;
                 num1 = operate(Number(num1), Number(num2), op);
                 answer.textContent = num1;
-                op = operator.textContent;
-                console.log(num1);
-                displayAnswer = "0";
             } else {
                 num1 = answer.textContent;
-                op = operator.textContent;
-                displayAnswer = "0";
             }
+            
+            op = operator.textContent;
+            pairs = false;
+            displayAnswer = "0";
         });
     });
 
