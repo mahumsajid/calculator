@@ -50,9 +50,11 @@ function changeDisplay() {
 
     let answer = document.querySelector(".answer");
     let digits = document.querySelectorAll(".digit");
+    let period = document.querySelector(".period");
     let displayAnswer = answer.textContent;
     let pairs = false;
-
+    let onePeriod = false;
+    
     digits.forEach(digit => {
         digit.addEventListener("click", () => {
             if (displayAnswer === "0" && digit.textContent !== ".") {
@@ -76,6 +78,7 @@ function changeDisplay() {
         num2 = null;
         op = null;
         pairs = false;
+        onePeriod = false;
     });
 
     let operators = document.querySelectorAll(".operator");
@@ -87,6 +90,7 @@ function changeDisplay() {
                 num2 = answer.textContent;
                 num1 = operate(Number(num1), Number(num2), op);
                 answer.textContent = num1;
+                onePeriod = false;
             } else {
                 num1 = answer.textContent;
             }
@@ -112,6 +116,17 @@ function changeDisplay() {
             displayAnswer = "0";
 
             op = null;
+
+            onePeriod = false;
+        }
+    });
+
+
+    period.addEventListener("click", () => {
+        if(!onePeriod) {
+            displayAnswer = displayAnswer + period.textContent;
+            answer.textContent = displayAnswer;
+            onePeriod = true;
         }
     });
 
