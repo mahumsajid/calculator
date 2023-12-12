@@ -17,15 +17,18 @@ function countDecimals(number) {
 function divide(num1, num2) {
     if (num1 % num2 === 0) {
         return num1 / num2;
-    } else {
-        let decimals = countDecimals(num1 / num2);
-        if (decimals > 9) {
-            return (num1 / num2).toFixed(9);
-        } 
-        return num1 / num2;
     }
+    let decimals = countDecimals(number);
+    if (decimals > 9) {
+        return number.toFixed(9);
+    } 
+    return num1 / num2;
 }
 
+function checkLength(number) {
+    
+    return (number.toString().length > 10);
+}
 
 let num1, num2, op;
 
@@ -54,18 +57,20 @@ function changeDisplay() {
     let displayAnswer = answer.textContent;
     let pairs = false;
     let onePeriod = false;
+    let countNum = 0;
     
     digits.forEach(digit => {
         digit.addEventListener("click", () => {
-            if (displayAnswer === "0" && digit.textContent !== ".") {
-                displayAnswer = digit.textContent;
-            } else {
-                displayAnswer = displayAnswer + digit.textContent;
+            if (countNum < 10) {
+                if (displayAnswer === "0" && digit.textContent !== ".") {
+                    displayAnswer = digit.textContent;
+                } else {
+                    displayAnswer = displayAnswer + digit.textContent;
+                }
+                answer.textContent = displayAnswer;
+                pairs = true;
+                countNum++;
             }
-
-            answer.textContent = displayAnswer;
-            pairs = true;
-
         });
     });
 
@@ -79,6 +84,7 @@ function changeDisplay() {
         op = null;
         pairs = false;
         onePeriod = false;
+        countNum = 0;
     });
 
     let operators = document.querySelectorAll(".operator");
@@ -89,7 +95,12 @@ function changeDisplay() {
             if (op != null && pairs) {
                 num2 = answer.textContent;
                 num1 = operate(Number(num1), Number(num2), op);
-                answer.textContent = num1;
+                console.log(checkLength(num1), num1.length);
+                if(checkLength(num1)) {
+                    answer.textContent = "LARGE";
+                } else {
+                    answer.textContent = num1;
+                }
                 onePeriod = false;
             } else {
                 num1 = answer.textContent;
@@ -97,6 +108,7 @@ function changeDisplay() {
 
             op = operator.textContent;
             pairs = false;
+            countNum = 0;
             displayAnswer = "0";
         });
     });
@@ -111,7 +123,11 @@ function changeDisplay() {
                 answer.textContent = "ERROR";
             } else {
                 displayAnswer = operate(Number(num1), Number(num2), op);
-                answer.textContent = displayAnswer;
+                if (checkLength(displayAnswer)) {
+                    answer.textContent = "LARGE";
+                } else {
+                    answer.textContent = displayAnswer;
+                }
             }
             displayAnswer = "0";
 
