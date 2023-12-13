@@ -23,13 +23,13 @@ function divide(num1, num2) {
     //round decimals
     let decimals = countDecimals(num1 / num2);
     if (decimals > 9) {
-        return (num1 / num2).toFixed(9);
+        return (num1 / num2).toFixed(8);
     } 
     return num1 / num2;
 }
 
 function checkLength(number) {
-    return (number.toString().length > 12);
+    return (number.toString().length > 11);
 }
 
 function operate(num1, num2, operator) {
@@ -67,6 +67,8 @@ function changeDisplay() {
 
     //checks how many characters in display to avoid going over
     let countNum = 0;
+
+    let temp = 0;
     
     digits.forEach(digit => {
         digit.addEventListener("click", () => {
@@ -105,7 +107,13 @@ function changeDisplay() {
                 num2 = answer.textContent;
                 num1 = operate(Number(num1), Number(num2), op);
                 if (checkLength(num1)) {
-                    answer.textContent = "LARGE";
+                    temp = num1.toExponential();
+                    if (checkLength(temp)) {
+                        answer.textContent = num1.toExponential(1);
+                    } else {
+                        answer.textContent = temp;
+                    }
+                    temp = 0;
                 } else {
                     answer.textContent = num1;
                 }
@@ -132,7 +140,14 @@ function changeDisplay() {
             } else {
                 displayAnswer = operate(Number(num1), Number(num2), op);
                 if (checkLength(displayAnswer)) {
-                    answer.textContent = "LARGE";
+                    temp = displayAnswer.toExponential();
+                    if (checkLength(temp)) {
+                        answer.textContent = displayAnswer.toExponential(1);
+                    } else {
+                        answer.textContent = temp;
+                    }
+
+                    temp = 0;
                 } else {
                     answer.textContent = displayAnswer;
                 }
